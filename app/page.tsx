@@ -35,23 +35,7 @@ const REVIEWS = [
   { name: 'Maria Sunam', stars: 5, text: 'I got the chocolate buttercups, which was chocolate covered pumpkin seed butter and shredded chicken sandwich. I loveeeddddd the chocolates. I just finished these chocolates and I am craving more already!', image: '/assets/review_person_images/Maria Sunam.png' },
 ];
 
-/* ─── Mountain SVG Logo Mark ─── */
-const MountainIcon = () => (
-  <svg className="logo-icon" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path
-      d="M24 4C20 10 14 14 6 18C10 17 16 16 20 18C18 16 22 10 24 4Z"
-      fill="currentColor" fillOpacity="0.15" stroke="currentColor" strokeWidth="1.5"
-    />
-    <path
-      d="M24 4C28 12 34 16 42 18C38 17 32 16 28 18C30 16 26 10 24 4Z"
-      fill="currentColor" fillOpacity="0.15" stroke="currentColor" strokeWidth="1.5"
-    />
-    <path
-      d="M2 22C8 20 16 17 24 12C32 17 40 20 46 22"
-      stroke="currentColor" strokeWidth="1.2" fill="none"
-    />
-  </svg>
-);
+
 
 /* ─── Components ─── */
 
@@ -60,12 +44,14 @@ function Header({ onMenuOpen }: { onMenuOpen: () => void }) {
     <header className="site-header">
       <div className="container">
         <a href="#" className="logo">
-          <MountainIcon />
-          <div className="logo-text">
-            <span className="logo-the">the</span>
-            <span className="logo-collective">collective</span>
-            <span className="logo-cafe">Cafe</span>
-          </div>
+          <Image 
+            src="/assets/brand/the_collective_logo_transparent.png" 
+            alt="The Collective Cafe Logo" 
+            width={320} 
+            height={96} 
+            style={{ objectFit: 'contain' }}
+            priority
+          />
         </a>
 
         <nav>
@@ -122,6 +108,27 @@ function Hero() {
   );
 }
 
+const CoffeeCupSVG = () => (
+  <svg 
+    viewBox="0 0 100 100" 
+    width="120" 
+    height="120" 
+    fill="none" 
+    stroke="var(--color-logo-green)" 
+    strokeWidth="3" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+  >
+    <path d="M35 25 Q 40 15 35 5" className="steam" />
+    <path d="M50 25 Q 55 15 50 5" className="steam" style={{ animationDelay: '0.2s' }} />
+    <path d="M65 25 Q 70 15 65 5" className="steam" style={{ animationDelay: '0.4s' }} />
+    
+    <path d="M25 35 H 75 V 55 C 75 75 62.5 85 50 85 C 37.5 85 25 75 25 55 Z" fill="var(--color-logo-green)" fillOpacity="0.1" />
+    <path d="M75 45 H 85 C 90 45 90 60 75 60" />
+    <path d="M15 85 Q 50 95 85 85" />
+  </svg>
+);
+
 function Philosophy() {
   return (
     <section className="philosophy" id="story">
@@ -140,7 +147,12 @@ function Philosophy() {
       />
 
       <div className="container philosophy-inner">
-        {/* Polaroid with offset shadow */}
+        {/* Mobile Coffee Cup Icon */}
+        <div className="mobile-coffee-icon-wrapper">
+          <CoffeeCupSVG />
+        </div>
+
+        {/* Polaroid with offset shadow (Desktop only) */}
         <div className="polaroid-frame">
           <div className="polaroid-card">
             <div className="polaroid-img-wrap" style={{ position: 'relative', width: '100%', aspectRatio: '4/3' }}>

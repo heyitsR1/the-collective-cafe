@@ -21,7 +21,8 @@ html {
 /* --- Design Tokens --- */
 :root {
   --bg-cream: #EDE4D3;
-  --bg-header: #F0E6D0;
+  /* --bg-header: rgba(22, 74, 52, 0.85); */
+  --bg-header: #164a34;
   --bg-sage: #9AAC93;
   --text-dark: #2D1E11;
   --text-white: #FFFFFF;
@@ -94,9 +95,8 @@ img {
    ========================================================== */
 .site-header {
   background-color: var(--bg-header);
-  padding: 20px 0;
-  position: sticky;
-  top: 0;
+  padding: 8px 0;
+  position: relative;
   z-index: 100;
   border-bottom: 1px solid rgba(0, 0, 0, 0.04);
 }
@@ -116,48 +116,7 @@ img {
   text-decoration: none;
 }
 
-.logo-icon {
-  width: 36px;
-  height: 28px;
-  flex-shrink: 0;
-}
 
-.logo-text {
-  font-family: var(--font-heading);
-  line-height: 1;
-}
-
-.logo-the {
-  font-size: 0.65rem;
-  font-weight: 400;
-  letter-spacing: 0.5px;
-  display: block;
-}
-
-.logo-collective {
-  font-size: 1.6rem;
-  font-weight: 700;
-  display: block;
-  letter-spacing: -0.5px;
-}
-
-.logo-cafe {
-  font-size: 0.7rem;
-  font-weight: 400;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.logo-cafe::before,
-.logo-cafe::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: currentColor;
-}
 
 /* Desktop nav */
 .nav-links {
@@ -169,6 +128,7 @@ img {
 .nav-links a {
   font-size: 1rem;
   font-weight: 500;
+  color: var(--text-white);
   transition: opacity 0.2s;
 }
 
@@ -189,7 +149,7 @@ img {
   display: block;
   width: 24px;
   height: 2px;
-  background: var(--text-dark);
+  background: var(--text-white);
   margin: 5px 0;
   transition: all 0.3s;
 }
@@ -376,6 +336,33 @@ img {
   margin-bottom: 20px;
 }
 
+/* Mobile Coffee Icon Animation & Wrapper */
+@keyframes float-steam {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: translateY(-5px) translateX(2px);
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: translateY(-10px) translateX(-2px);
+    opacity: 0;
+  }
+}
+
+.steam {
+  animation: float-steam 2.5s infinite ease-out;
+  transform-origin: bottom;
+}
+
+.mobile-coffee-icon-wrapper {
+  display: none;
+}
+
 .philosophy-text p {
   font-size: 1.05rem;
   line-height: 1.75;
@@ -512,12 +499,29 @@ img {
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
 }
 
-.gallery-polaroid:nth-child(1) { transform: rotate(-3deg); }
-.gallery-polaroid:nth-child(2) { transform: rotate(2deg) translateY(20px); }
-.gallery-polaroid:nth-child(3) { transform: rotate(-1.5deg); }
-.gallery-polaroid:nth-child(4) { transform: rotate(3deg); }
-.gallery-polaroid:nth-child(5) { transform: rotate(-2.5deg) translateY(-10px); }
-.gallery-polaroid:nth-child(6) { transform: rotate(1deg); }
+.gallery-polaroid:nth-child(1) {
+  transform: rotate(-3deg);
+}
+
+.gallery-polaroid:nth-child(2) {
+  transform: rotate(2deg) translateY(20px);
+}
+
+.gallery-polaroid:nth-child(3) {
+  transform: rotate(-1.5deg);
+}
+
+.gallery-polaroid:nth-child(4) {
+  transform: rotate(3deg);
+}
+
+.gallery-polaroid:nth-child(5) {
+  transform: rotate(-2.5deg) translateY(-10px);
+}
+
+.gallery-polaroid:nth-child(6) {
+  transform: rotate(1deg);
+}
 
 .gallery-polaroid:hover {
   transform: scale(1.08) rotate(0deg) !important;
@@ -563,6 +567,7 @@ img {
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(-50%);
   }
@@ -571,14 +576,15 @@ img {
 .review-list {
   display: flex;
   gap: 24px;
-  padding-right: 24px; /* Matches gap to ensure seamless loop */
+  padding-right: 24px;
+  /* Matches gap to ensure seamless loop */
 }
 
 .review-card {
   background: #fff;
   border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   width: 400px;
   flex-shrink: 0;
   display: flex;
@@ -589,7 +595,7 @@ img {
 
 .review-card:hover {
   transform: scale(1.02) translateY(-4px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .review-card:nth-child(even) {
@@ -636,7 +642,7 @@ img {
   align-items: center;
   background-color: #fff;
   color: var(--text-dark);
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 12px 32px;
   border-radius: 50px;
   font-size: 1.05rem;
@@ -651,7 +657,7 @@ img {
 .btn-google-review:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-  border-color: rgba(0,0,0,0.2);
+  border-color: rgba(0, 0, 0, 0.2);
 }
 
 
@@ -805,6 +811,34 @@ img {
    RESPONSIVE — Mobile
    ========================================================== */
 @media (max-width: 640px) {
+  .site-header {
+    background-color: #164a34;
+    padding: 12px 0;
+    /* More padding for mobile */
+  }
+
+  .site-header .container {
+    position: relative;
+    justify-content: center;
+  }
+
+  .logo {
+    display: block;
+  }
+
+  .logo img {
+    max-width: 160px;
+    /* Decrease from 200px */
+    height: auto;
+  }
+
+  .hamburger {
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
   .nav-links {
     display: none;
   }
@@ -864,7 +898,14 @@ img {
   }
 
   .polaroid-frame {
-    max-width: 260px;
+    display: none;
+  }
+
+  .mobile-coffee-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
   }
 
   .menu-section {
@@ -879,12 +920,12 @@ img {
   .reviews-section {
     padding: 60px 0 80px;
   }
-  
+
   .reviews-section h2 {
     font-size: 2rem;
     margin-bottom: 40px;
   }
-  
+
   .review-card {
     width: 320px;
   }
