@@ -7,7 +7,7 @@ import { useState } from 'react';
 const NAV_ITEMS = [
   { label: 'Our Story', href: '#story' },
   { label: 'Menu', href: '#menu' },
-  { label: 'Gallery', href: '#menu' },
+  { label: 'Gallery', href: '#gallery' },
   { label: 'Find Us', href: '#find-us' },
 ];
 
@@ -20,10 +20,19 @@ const MENU_ITEMS = [
   { title: 'Hibiscus Refresher', src: '/assets/food_pictures/ai-generated/hibiscus_refresher.png' },
 ];
 
+const GALLERY_IMAGES = [
+  { src: '/assets/gallery/1.jpg', alt: 'Gallery Image 1' },
+  { src: '/assets/gallery/2.jpg', alt: 'Gallery Image 2' },
+  { src: '/assets/gallery/3.jpg', alt: 'Gallery Image 3' },
+  { src: '/assets/gallery/4.png', alt: 'Gallery Image 4' },
+  { src: '/assets/gallery/5.png', alt: 'Gallery Image 5' },
+  { src: '/assets/gallery/6.png', alt: 'Gallery Image 6' },
+];
+
 const REVIEWS = [
-  { name: 'Priya S.', stars: 5, text: 'Such a calm and cozy space! The matcha latte is the best I\'ve had in Kathmandu. Highly recommend!' },
-  { name: 'Rohan K.', stars: 5, text: 'My go-to spot for a quiet work session. Great coffee, warm vibes, and the staff is incredibly friendly.' },
-  { name: 'Anika M.', stars: 4, text: 'Loved the artisan chocolates! The space feels like a warm hug. Will definitely be coming back.' },
+  { name: 'Vyshnavi C.', stars: 5, text: 'Cosy café to stop by and have a yummy cake and relaxing time. The staff is very friendly', image: '/assets/review_person_images/Vyshnavi C.png' },
+  { name: 'Sahas Shrestha', stars: 5, text: 'Love thee Awakee tea bagss, and Matchaa heree...', image: '/assets/review_person_images/Sahas Shrestha.png' },
+  { name: 'Maria Sunam', stars: 5, text: 'I got the chocolate buttercups, which was chocolate covered pumpkin seed butter and shredded chicken sandwich. I loveeeddddd the chocolates. I just finished these chocolates and I am craving more already!', image: '/assets/review_person_images/Maria Sunam.png' },
 ];
 
 /* ─── Mountain SVG Logo Mark ─── */
@@ -102,9 +111,11 @@ function Hero() {
             sizes="100vw"
           />
         </div>
-        <div className="hero-content">
-          <h1>Your Cozy Coffee Retreat</h1>
-          <a href="#menu" className="btn-cta">Discover Our Blends</a>
+        <div className="container hero-content-container">
+          <div className="hero-content">
+            <h1>Your Cozy Coffee Retreat</h1>
+            <a href="#menu" className="btn-cta">Discover Our Blends</a>
+          </div>
         </div>
       </div>
     </section>
@@ -134,7 +145,7 @@ function Philosophy() {
           <div className="polaroid-card">
             <div className="polaroid-img-wrap" style={{ position: 'relative', width: '100%', aspectRatio: '4/3' }}>
               <Image
-                src="/assets/cafe_pictures/cafe_outside.jpeg"
+                src="/assets/cafe_pictures/cafe_outside_pic.jpg"
                 alt="The Collective exterior"
                 fill
                 style={{ objectFit: 'cover' }}
@@ -187,34 +198,99 @@ function CuratedMenu() {
             </div>
           ))}
         </div>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
+          <button className="btn-cta">Browse Menu</button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Gallery() {
+  return (
+    <section className="gallery-section" id="gallery">
+      <div className="container">
+        <h2>Scrapbook Memories</h2>
+        <div className="gallery-grid">
+          {GALLERY_IMAGES.map((img, i) => (
+            <div className="gallery-polaroid" key={i}>
+              <div className="polaroid-card">
+                <div className={`tape-strip ${i % 2 !== 0 ? 'alt' : ''}`} />
+                <div className="polaroid-img-wrap">
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    sizes="(max-width: 640px) 45vw, 280px"
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
 function Reviews() {
+  const REVIEW_ITEMS = [...REVIEWS, ...REVIEWS, ...REVIEWS]; // Triple it for continuous flow
+
   return (
-    <section style={{ padding: '0 0 60px' }}>
+    <section className="reviews-section" id="reviews">
       <div className="container">
-        <h2 style={{ fontSize: '2rem', textAlign: 'center', marginBottom: '40px' }}>What People Say</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '24px' }}>
-          {REVIEWS.map((r, i) => (
-            <div key={i} style={{
-              background: '#fff',
-              borderRadius: '12px',
-              padding: '28px 24px',
-              boxShadow: '0 2px 12px rgba(0,0,0,0.05)',
-            }}>
-              <div style={{ marginBottom: '12px', color: '#e0a830', fontSize: '1.1rem', letterSpacing: '2px' }}>
-                {'★'.repeat(r.stars)}{'☆'.repeat(5 - r.stars)}
+        <h2>What People Say</h2>
+      </div>
+      
+      <div className="reviews-marquee-wrapper">
+        <div className="reviews-marquee-container">
+          <div className="review-list">
+            {REVIEW_ITEMS.map((r, i) => (
+              <div key={i} className="review-card">
+                <div className="review-card-header">
+                  <Image src={r.image} alt={r.name} width={56} height={56} className="review-card-img" />
+                  <div>
+                    <div className="review-card-name">{r.name}</div>
+                    <div className="review-card-stars">{'★'.repeat(r.stars)}{'☆'.repeat(5 - r.stars)}</div>
+                  </div>
+                </div>
+                <p className="review-card-text">&ldquo;{r.text}&rdquo;</p>
               </div>
-              <p style={{ fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '16px', fontStyle: 'italic' }}>
-                &ldquo;{r.text}&rdquo;
-              </p>
-              <p style={{ fontWeight: 600, fontSize: '0.9rem' }}>{r.name}</p>
-            </div>
-          ))}
+            ))}
+          </div>
+          <div className="review-list" aria-hidden="true">
+            {REVIEW_ITEMS.map((r, i) => (
+              <div key={i} className="review-card">
+                <div className="review-card-header">
+                  <Image src={r.image} alt={r.name} width={56} height={56} className="review-card-img" />
+                  <div>
+                    <div className="review-card-name">{r.name}</div>
+                    <div className="review-card-stars">{'★'.repeat(r.stars)}{'☆'.repeat(5 - r.stars)}</div>
+                  </div>
+                </div>
+                <p className="review-card-text">&ldquo;{r.text}&rdquo;</p>
+              </div>
+            ))}
+          </div>
         </div>
+      </div>
+      
+      <div className="container" style={{ display: 'flex', justifyContent: 'center', marginTop: '60px' }}>
+        <a 
+          href="https://www.google.com/maps/place/The+Collective+Cafe/@27.6888722,85.3279131,911m/data=!3m1!1e3!4m8!3m7!1s0x39eb199baa92f81d:0xd3d9db450c791f64!8m2!3d27.6888722!4d85.3279131!9m1!1b1!16s%2Fg%2F11ym_k22z0!5m1!1e2?hl=en-GB&entry=ttu&g_ep=EgoyMDI2MDQxOS4wIKXMDSoASAFQAw%3D%3D"
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="btn-google-review"
+        >
+          <svg viewBox="0 0 24 24" fill="none" style={{ width: '22px', height: '22px', marginRight: '10px' }}>
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          Read all Reviews on Google
+        </a>
       </div>
     </section>
   );
@@ -271,6 +347,7 @@ export default function Home() {
         <Hero />
         <Philosophy />
         <CuratedMenu />
+        <Gallery />
         <Reviews />
       </main>
       <Footer />
