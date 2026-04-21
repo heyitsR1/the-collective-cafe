@@ -12,10 +12,12 @@ const NAV_ITEMS = [
 ];
 
 const MENU_ITEMS = [
-  { title: 'Iced Matcha', src: '/assets/food_pictures/iced_matcha.png' },
-  { title: 'Hibiscus Refresher', src: '/assets/food_pictures/hibiscus_refresher.png' },
-  { title: 'Chocolate Buttercups', src: '/assets/food_pictures/chocolate_buttercups.png' },
+  { title: 'Matcha Latte', src: '/assets/food_pictures/MatchaLatte.jpg' },
+  { title: 'Cafe Latte', src: '/assets/food_pictures/cafe_latte.webp' },
   { title: 'Banana Cake', src: '/assets/food_pictures/cake_drink.png' },
+  { title: 'Butter Croissant', src: '/assets/food_pictures/crossiant.webp' },
+  { title: 'Mocha Combo', src: '/assets/food_pictures/mocha-combo.webp' },
+  { title: 'Hibiscus Refresher', src: '/assets/food_pictures/ai-generated/hibiscus_refresher.png' },
 ];
 
 const REVIEWS = [
