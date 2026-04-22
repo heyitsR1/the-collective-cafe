@@ -85,26 +85,80 @@ function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
 
 function Hero() {
   return (
-    <section className="hero" id="hero">
-      <div className="hero-inner">
-        <div className="hero-image-wrapper">
-          <Image
-            src="/assets/cafe_pictures/cafe_inside.png"
-            alt="The Collective Cafe interior — warm lights, green wall, mountain counter"
-            fill
-            style={{ objectFit: 'cover', objectPosition: 'center' }}
-            priority
-            sizes="100vw"
-          />
-        </div>
-        <div className="container hero-content-container">
-          <div className="hero-content">
-            <h1>Your Cozy Coffee Retreat</h1>
-            <a href="#menu" className="btn-cta">Discover Our Blends</a>
+    <>
+      <section className="hero" id="hero">
+        <div className="hero-inner">
+          <div className="hero-image-wrapper">
+            <Image
+              src="/assets/cafe_pictures/cafe_inside.png"
+              alt="The Collective Cafe interior — warm lights, green wall, mountain counter"
+              fill
+              style={{ objectFit: 'cover', objectPosition: 'center 30%' }}
+              priority
+              sizes="100vw"
+            />
+          </div>
+
+          {/* Mobile: subtle cream fade at the bottom */}
+          <div className="hero-mobile-scrim" />
+
+          {/* Desktop: left-side gradient scrim only — right half stays pristine */}
+          <div className="hero-desktop-scrim" />
+
+          {/* Desktop editorial text — anchored bottom-left */}
+          <div className="hero-desktop-overlay">
+            <span className="hero-eyebrow">Kathmandu&rsquo;s cosiest retreat</span>
+            <h1 className="hero-desktop-h1">Your Cozy<br />Coffee Retreat</h1>
+            <div className="hero-rule" />
+            <p className="hero-desktop-desc">
+              Hand-crafted blends, locally-sourced ingredients,
+              and a warm space where everyone belongs.
+            </p>
+            <div className="hero-desktop-cta-row">
+              <a href="#menu" className="btn-cta">Discover Our Blends</a>
+              <span className="hero-scroll-hint">
+                <span className="hero-chevron">↓</span> Scroll to explore
+              </span>
+            </div>
+          </div>
+
+          {/* Rating strip — desktop bottom right */}
+          <div className="hero-rating-strip">
+            <div className="hero-stars">★★★★★</div>
+            <div className="hero-rating-label">4.9 · 200+ Google Reviews</div>
           </div>
         </div>
+      </section>
+
+      {/* Mobile bottom card — hidden on desktop via CSS */}
+      <div className="hero-mobile-card">
+        <div className="hero-card-handle" />
+        <span className="hero-eyebrow">Kathmandu&rsquo;s cosiest retreat</span>
+        <h1>Your Cozy<br />Coffee Retreat</h1>
+        <p className="hero-card-desc">
+          Hand-crafted blends, locally-sourced ingredients,
+          and a warm space where everyone belongs.
+        </p>
+        <a href="#menu" className="btn-cta">Discover Our Blends</a>
+        <div className="hero-social-proof">
+          <div className="hero-avatars">
+            {['Vyshnavi C.', 'Sahas Shrestha', 'Maria Sunam'].map((name, i) => (
+              <div className="hero-avatar" key={i}>
+                <Image
+                  src={`/assets/review_person_images/${name}.png`}
+                  alt={name}
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+              </div>
+            ))}
+          </div>
+          <span className="hero-proof-text">
+            <strong>200+ happy customers</strong> this week
+          </span>
+        </div>
       </div>
-    </section>
+    </>
   );
 }
 
