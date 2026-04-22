@@ -157,16 +157,18 @@ img {
 /* ==========================================================
    HERO
    ========================================================== */
+
+/* Mobile-first defaults — bottom-card layout */
 .hero {
   width: 100%;
-  overflow: hidden;
 }
 
 .hero-inner {
   position: relative;
   width: 100%;
-  height: 75vh;
-  min-height: 500px;
+  height: 58vh;
+  min-height: 340px;
+  overflow: hidden;
 }
 
 .hero-image-wrapper {
@@ -177,52 +179,221 @@ img {
   overflow: hidden;
 }
 
-.hero-image-wrapper::after {
-  content: "";
+/* Mobile: subtle cream fade at the bottom of the photo */
+.hero-mobile-scrim {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.08) 0%,
+    rgba(237, 228, 211, 0.45) 100%
+  );
   z-index: 2;
 }
 
-.hero-image-wrapper img {
-  filter: blur(1px);
-  transform: scale(1.1);
-  object-fit: cover;
+/* Desktop-only elements — hidden on mobile */
+.hero-desktop-scrim,
+.hero-desktop-overlay,
+.hero-rating-strip {
+  display: none;
 }
 
-.hero-content-container {
+/* ── Mobile bottom card (in DOM flow, below hero image) ── */
+.hero-mobile-card {
   position: relative;
-  height: 100%;
-  pointer-events: none;
+  z-index: 10;
+  margin-top: -52px;
+  background: var(--bg-cream);
+  border-radius: 26px 26px 0 0;
+  padding: 40px 28px 44px;
+  box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.12);
 }
 
-.hero-content {
-  position: absolute;
-  right: 24px;
-  top: 50%;
-  transform: translateY(-50%);
-  max-width: 420px;
-  color: var(--text-white);
-  z-index: 5;
-  pointer-events: auto;
+.hero-card-handle {
+  width: 38px;
+  height: 4px;
+  background: rgba(45, 30, 17, 0.18);
+  border-radius: 99px;
+  margin: -20px auto 30px;
 }
 
-.hero-content h1 {
-  font-size: 3.75rem;
+.hero-eyebrow {
+  font-family: var(--font-hand);
+  font-size: 1.1rem;
+  color: var(--color-logo-green);
+  letter-spacing: 0.03em;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.hero-mobile-card h1 {
+  font-size: 2.5rem;
   font-weight: 700;
-  color: var(--text-white);
-  margin-bottom: 32px;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  text-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.9),
-    0 4px 12px rgba(0, 0, 0, 0.9),
-    0 8px 24px rgba(0, 0, 0, 0.9);
+  color: var(--text-dark);
+  line-height: 1.12;
+  margin-bottom: 16px;
 }
 
-.hero-content .btn-cta {
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+.hero-card-desc {
+  font-size: 0.95rem;
+  color: #5a4a3a;
+  line-height: 1.65;
+  margin-bottom: 28px;
+  max-width: 320px;
+}
+
+/* Social proof strip */
+.hero-social-proof {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.hero-avatars {
+  display: flex;
+}
+
+.hero-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--bg-cream);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.hero-avatar + .hero-avatar {
+  margin-left: -8px;
+}
+
+.hero-proof-text {
+  font-size: 0.82rem;
+  color: #5a4a3a;
+}
+
+.hero-proof-text strong {
+  color: var(--text-dark);
+}
+
+@keyframes hero-bounce-down {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* ── Desktop: editorial bottom-left overlay (≥769px) ── */
+@media (min-width: 769px) {
+  .hero-inner {
+    height: 90vh;
+    min-height: 560px;
+  }
+
+  /* Hide mobile elements */
+  .hero-mobile-scrim,
+  .hero-mobile-card {
+    display: none;
+  }
+
+  /* Left-side gradient scrim — right half stays pristine */
+  .hero-desktop-scrim {
+    display: block;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      rgba(22, 42, 30, 0.78) 0%,
+      rgba(10, 25, 15, 0.55) 38%,
+      transparent 60%
+    );
+    z-index: 2;
+  }
+
+  /* Editorial text block — anchored bottom-left */
+  .hero-desktop-overlay {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    bottom: 64px;
+    left: 60px;
+    z-index: 10;
+    max-width: 480px;
+  }
+
+  .hero-eyebrow {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 12px;
+  }
+
+  .hero-desktop-h1 {
+    font-family: var(--font-heading);
+    font-size: 4.2rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.08;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  .hero-rule {
+    width: 48px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.4);
+    margin-bottom: 20px;
+  }
+
+  .hero-desktop-desc {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.7;
+    margin-bottom: 32px;
+    max-width: 380px;
+  }
+
+  .hero-desktop-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .hero-scroll-hint {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .hero-chevron {
+    animation: hero-bounce-down 1.8s ease-in-out infinite;
+    display: inline-block;
+  }
+
+  /* Rating strip — bottom right corner */
+  .hero-rating-strip {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: absolute;
+    bottom: 28px;
+    right: 40px;
+    z-index: 10;
+    gap: 4px;
+  }
+
+  .hero-stars {
+    color: #F5C842;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+  }
+
+  .hero-rating-label {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.65);
+    font-weight: 500;
+  }
 }
 
 /* ==========================================================
@@ -788,13 +959,7 @@ img {
     gap: 40px 24px;
   }
 
-  .hero-content {
-    max-width: 340px;
-  }
 
-  .hero-content h1 {
-    font-size: 3rem;
-  }
 
   .footer-inner {
     grid-template-columns: 1fr;
@@ -827,7 +992,7 @@ img {
   }
 
   .logo img {
-    max-width: 160px;
+    max-width: 100px;
     /* Decrease from 200px */
     height: auto;
   }
@@ -847,46 +1012,7 @@ img {
     display: block;
   }
 
-  .hero {
-    padding: 0;
-  }
 
-  .hero-inner {
-    margin-top: 0;
-  }
-
-  .hero-inner {
-    height: 60vh;
-    min-height: 400px;
-  }
-
-  .hero-image-wrapper {
-    position: absolute;
-    height: 100%;
-  }
-
-  .hero-content-container {
-    height: 100%;
-  }
-
-  .hero-content {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    right: auto;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 420px;
-    background: transparent;
-    padding: 0;
-    text-align: center;
-    color: var(--text-white);
-  }
-
-  .hero-content h1 {
-    font-size: 2.8rem;
-    margin-bottom: 24px;
-  }
 
   .philosophy {
     padding: 60px 0 80px;
